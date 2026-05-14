@@ -1,0 +1,21 @@
+/* client/src/index.css */
+@import "tailwindcss";
+
+/* Custom CSS variables for brand colors */
+:root {
+  --gold: #C9A84C;
+  --gold-light: #F0D080;
+  --gold-dark: #9A7B30;
+  --maroon: #800020;
+  --cream: #FDF8F0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--cream);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
