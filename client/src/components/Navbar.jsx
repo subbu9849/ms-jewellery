@@ -42,7 +42,7 @@ export default function Navbar({ onSearch }) {
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
           
           {/* Logo */}
-          <Link to="/" className="flex-shrink-0">
+          <Link to="/" className="shrink-0">
             <div className="flex flex-col leading-none">
               <span style={{ color: '#C9A84C', fontFamily: 'Georgia, serif' }} 
                     className="text-2xl font-bold tracking-wider">

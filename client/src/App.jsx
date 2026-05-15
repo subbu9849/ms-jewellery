@@ -1,122 +1,79 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+// client/src/App.jsx
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+import Catalog from './pages/Catalog';
 
-function App() {
-  const [count, setCount] = useState(0)
-
+// Simple footer component inline
+function Footer() {
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
+    <footer style={{ backgroundColor: '#1a0a00' }} className="text-gray-400 py-10 px-4 mt-10">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
         <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
+          <h3 style={{ color: '#C9A84C', fontFamily: 'Georgia, serif' }} 
+              className="text-xl font-bold mb-3">MS Jewellery</h3>
+          <p className="text-sm leading-relaxed">
+            Prathipadu Mandal, Guntur District<br />
+            Andhra Pradesh — 522019
+          </p>
+          <p className="mt-2 text-sm">
+            📞 <a href="tel:+919876543210" className="hover:text-yellow-400">+91 98765 43210</a>
           </p>
         </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
+        <div>
+          <h4 className="text-white font-semibold mb-3">Quick Links</h4>
+          <ul className="space-y-2 text-sm">
+            {['Home', 'Gold Jewelry', 'Silver Jewelry', 'Bridal Collection'].map(l => (
+              <li key={l}><a href="#" className="hover:text-yellow-400 transition-colors">{l}</a></li>
+            ))}
           </ul>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
+        <div>
+          <h4 className="text-white font-semibold mb-3">Timings</h4>
+          <p className="text-sm">Mon – Sat: 9:00 AM – 8:00 PM</p>
+          <p className="text-sm">Sunday: 10:00 AM – 6:00 PM</p>
+          <p className="text-sm mt-3">
+            🏅 BIS Hallmarked Jewelry<br />
+            💯 Certified Purity Guaranteed
+          </p>
         </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      </div>
+      <div className="text-center text-xs text-gray-600 mt-8 border-t border-gray-800 pt-4">
+        © {new Date().getFullYear()} MS Jewellery, Prathipadu. All rights reserved.
+      </div>
+    </footer>
+  );
 }
 
-export default App
+// Inner app with router access
+function AppContent() {
+  const navigate = useNavigate();
+  
+  const handleSearch = (query) => {
+    navigate(`/catalog?search=${query}`);
+  };
+
+  return (
+    <div className="flex flex-col min-h-screen">
+      <Navbar onSearch={handleSearch} />
+      <main className="flex-1">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/catalog" element={<Catalog />} />
+          <Route path="/catalog/:id" element={<Catalog />} />
+        </Routes>
+      </main>
+      <Footer />
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
+  );
+}
