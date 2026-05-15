@@ -1,13 +1,15 @@
 /* client/src/index.css */
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* Custom CSS variables for brand colors */
 :root {
   --gold: #C9A84C;
   --gold-light: #F0D080;
   --gold-dark: #9A7B30;
   --maroon: #800020;
   --cream: #FDF8F0;
+  --dark: #1a0a00;
 }
 
 body {
@@ -15,7 +17,6 @@ body {
   background-color: var(--cream);
 }
 
-/* Scrollbar styling */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #f1f1f1; }
 ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
